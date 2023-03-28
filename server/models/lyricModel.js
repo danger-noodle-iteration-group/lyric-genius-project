@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const MONGO_URI = '';
+const MONGO_URI = 
+  'mongodb+srv://jukebox:gEBCWrhDoMMwIM5y@jukeboxjumble.e56634b.mongodb.net/?retryWrites=true&w=majority';
 
 mongoose
   .connect(MONGO_URI, {
