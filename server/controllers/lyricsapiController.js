@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const apiKey = '7699037ed77776052d7259ec3fd44c44'; // Replace with your actual API key
+const apiKey = ''; // Replace with your actual API key
 const baseUrl = 'https://api.musixmatch.com/ws/1.1/';
 const endpoint = 'matcher.lyrics.get';
 
