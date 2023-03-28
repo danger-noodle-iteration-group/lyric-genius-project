@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
-const MONGO_URI =
-  'mongodb+srv://Anna:lyricgeniusproject@mernapp.r9sezjx.mongodb.net/test';
+const MONGO_URI = '';
 
 mongoose
   .connect(MONGO_URI, {
