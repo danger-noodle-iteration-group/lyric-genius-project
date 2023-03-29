@@ -21,7 +21,6 @@ gptapiController.genLyrics = async (req, res, next) => {
         },
       ],
     });
-    
     console.log(completion.data);
     const response = completion.data.choices[0].message.content;
 
