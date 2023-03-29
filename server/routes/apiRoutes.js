@@ -1,21 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const gptapiController = require('../controllers/gptapiController');
 const lyricsapiController = require('../controllers/lyricsapiController');
-const databaseController = require('../controllers/databaseController');
 
-router.post(
-  '/lyricsapi',
-  lyricsapiController.getLyrics,
-  gptapiController.genLyrics,
-  databaseController.createEntry,
+router.get(
+  '/getsongs/:page',
+  lyricsapiController.getSongs,
   (req, res) => {
-    console.log('Lyrics:', res.locals.lyrics);
-    res.status(200).json({ lyrics: res.locals.newSong });
+    return res.status(200).json(res.locals.songs);
   }
 );
 
-router.get('/:id', databaseController.getSong, (req, res) => {
-  res.status(200).json(res.locals.foundSong);
+router.get('/getlyrics/:id', lyricsapiController.getLyrics, (req, res) => {
+  return res.status(200).json(res.locals.lyrics);
 });
 module.exports = router;
