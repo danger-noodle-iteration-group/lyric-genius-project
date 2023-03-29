@@ -1,8 +1,9 @@
 const axios = require('axios');
+const { raw } = require('express');
 require('dotenv').config();
 
 const apikey = process.env.LYRICS_API_KEY; // defined in .env
-axios.default.baseURL = 'https://api.musixmatch.com/ws/1.1'; // potentially just have one url variable which is baseURL + endpoint
+axios.defaults.baseURL = 'https://api.musixmatch.com/ws/1.1/'; // potentially just have one url variable which is baseURL + endpoint
 
 const lyricsapiController = {};
 
@@ -17,17 +18,23 @@ lyricsapiController.getSongs = (req, res, next) => {
     page,
     apikey,
   };
-  axios('/track.search', {params})
-  .then(function(data) {
-    const { track_list } = data.message.body;
+  console.log(params)
+  axios('track.search', {params})
+  .then(function(info) {
+    
+    const { track_list } = info.data.message.body;
+    
     const clean_track_list = track_list.filter(el => el.track.explicit === 0)
+    console.log(clean_track_list);
     res.locals.songs = clean_track_list.map(el => {
+      
       return {
-        track_id: el.trackId,
-        name: el.track_name,
-        artistName: el.artist_name
+        track_id: el.track.track_id,
+        track_name: el.track.track_name,
+        artist_name: el.track.artist_name
       }
     })
+    console.log(res.locals.songs)
     return next()
   })
   .catch((error) => {
@@ -46,9 +53,9 @@ lyricsapiController.getLyrics = (req, res, next) => {
     apikey
   };
 
-axios('/track.lyrics.get', {params})
-  .then(function(data) {
-    const rawLyrics = data.message.body.lyrics.lyrics_body.split('/n');
+axios('track.lyrics.get', {params})
+  .then(function(info) {
+    const rawLyrics = info.data.message.body.lyrics.lyrics_body.split('\n');
     const lyrics = rawLyrics.slice(0, rawLyrics.indexOf('...'));
     const jumbledLyrics = lyrics.map(el => {
       const arr = el.split(' ')
@@ -60,7 +67,8 @@ axios('/track.lyrics.get', {params})
       }
       return arr.join(' ');
     })
-    res.locals.lyrics = jumbledLyrics.join('/n')
+    console.log(lyrics)
+    res.locals.lyrics = jumbledLyrics.join(' \n ')
     next()
   })
   .catch((error) => {
