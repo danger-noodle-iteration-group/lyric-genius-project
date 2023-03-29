@@ -11,11 +11,11 @@ router.post(
   databaseController.createEntry,
   (req, res) => {
     console.log('Lyrics:', res.locals.lyrics);
-    res.status(200).json({ lyrics: res.locals.newSong });
+    return res.status(200).json({ lyrics: res.locals.newSong });
   }
 );
 
 router.get('/:id', databaseController.getSong, (req, res) => {
-  res.status(200).json(res.locals.foundSong);
+  return res.status(200).json(res.locals.foundSong);
 });
 module.exports = router;

@@ -18,7 +18,7 @@ gptapiController.genLyrics = async (req, res, next) => {
         {
           role: 'user',
           content: ` Completely Creatively rewrite these lyrics  for me : ${lyrics} but don't use the song title`,
-        },
+        }, // change prompt to better rewrite lyrics
       ],
     });
     console.log(completion.data);

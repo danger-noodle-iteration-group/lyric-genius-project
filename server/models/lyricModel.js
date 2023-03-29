@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+// CONSIDER REMOVING, ADDING TO USER MODEL
+
 const MONGO_URI =
   'mongodb+srv://jukebox:gEBCWrhDoMMwIM5y@jukeboxjumble.e56634b.mongodb.net/?retryWrites=true&w=majority';
 

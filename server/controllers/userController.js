@@ -3,14 +3,15 @@ const User = require('../models/userModel');
 const userController = {};
 
 userController.createUser = async (req, res, next) => {
-  console.log('in createuser controller')
+  console.log('in createuser controller');
   const { name, email, password } = req.body;
   try {
     if (name && password && email) {
+      // client side should validate this too
       await User.create({ name, email, password });
       return next();
     } else {
-      throw new Error('Missing name, email, or password');
+      throw new Error('Missing name, email, or password'); // clean up error handling
     }
   } catch (err) {
     next({
@@ -23,19 +24,20 @@ userController.createUser = async (req, res, next) => {
 
 userController.verifyUser = async (req, res, next) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email }); // pass in password
   if (!user) {
-    res.locals.error = 'Incorrect email';
+    res.locals.error = 'Incorrect email'; // "invalid username or password"
     return next();
   }
 
   if (password === user.password) {
+    // unnecessary if checking above
     console.log('id in verifyUser', user._id);
-    res.locals.id = user._id;
+    res.locals.id = user._id; // change to user.id
     res.locals.verified = true;
     return next();
   } else {
-    res.locals.error = 'Incorrect password';
+    res.locals.error = 'Incorrect password'; // unnecessary if checking above
     res.locals.verified = false;
     return next();
   }

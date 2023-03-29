@@ -12,7 +12,7 @@ databaseController.createEntry = async (req, res, next) => {
     const newSong = await Song.create({
       name: songname,
       artist: artist,
-      lyrics: response,
+      lyrics: response, // response = chatGPT lyrics
       trackId,
     });
     res.locals.newSong = newSong;
