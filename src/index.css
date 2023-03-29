@@ -11,3 +11,36 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#winnerBox{
+  display: flex;
+  justify-content: space-around;
+}
+#winnerMessage{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 10px;
+  background-color: rgba(81, 68, 163, 0.551);
+  height: auto;
+  padding: 50px;
+  padding-top: 30px;
+  max-width: 20vw;
+  border-radius: 100%;
+}
+.content{
+  margin: 5px;
+  font-size: 15px;
+  font-family: monospace;
+  overflow-wrap: break-word;
+}
+#winnerHeader{
+  font-size: 20px;
+  margin: 5px;
+  font-family: monospace;
+  overflow-wrap: break-word;
+}
+
+.gameContent{
+margin: 20px !important;
+}

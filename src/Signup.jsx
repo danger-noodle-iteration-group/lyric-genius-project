@@ -1,12 +1,13 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import Navbar from "./Navbar"
-import {Link} from "react-router-dom";
-import axios from 'axios';
+// import {Link} from "react-router-dom";
+// import axios from 'axios';
 function Signup() {
     const [inputPassword, setInputPassword] = useState("");
     const [inputUsername, setInputUsername] = useState("");
     const [inputEmail, setInputEmail] = useState("");
-    const [loggedIn, setLoggedIn] = useState(false)
+    // const [loggedIn, setLoggedIn] = useState(false)
+
     async function createUser(event) {
         event.preventDefault();
         console.log('in create user front end')
@@ -24,19 +25,8 @@ function Signup() {
         } catch(err) {
             console.error("Error in posting")
         }
-    // try {
-    //     axios.post("https://localhost:5001/users/createusers", {
-    //         name: inputUsername,
-    //         email: inputEmail,
-    //         password: inputPassword
-    //     });
-    //     setInputUsername(inputUsername)
-    //     setInputPassword(inputPassword)
-    //     setInputEmail(inputEmail)
-    //     setLoggedIn(true) //do we need a conditional here? try testing
-    // } catch (err) {
-    //     console.error("Error: ", err);
-    // }
+   
+        
     }
   return (
     <div>

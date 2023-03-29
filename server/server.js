@@ -19,9 +19,6 @@ app.use('/api', apiRoutes);
 app.use('/users', userRoutes);
 //
 //
-//
-//
-//
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
@@ -43,6 +40,7 @@ app.use((err, req, res, next) => {
   //  || 500;
   //   return res.status(errorStatus).send(res.locals.message);
 });
+
 app.listen(5001, () => {
   console.log('Server is running on port 5001');
 });
