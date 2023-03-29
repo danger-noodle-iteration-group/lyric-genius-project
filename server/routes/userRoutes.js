@@ -6,8 +6,9 @@ const cookiesController = require('../controllers/cookiesController');
 router.post(
   '/createusers',
   userController.createUser,
-  cookiesController.setSSIDCookie, // either allow login on successful signup, or remove setSSIDCookie on sign up
+  // cookiesController.setSSIDCookie, // either allow login on successful signup, or remove setSSIDCookie on sign up
   (req, res) => {
+    console.log('hello');
     res.status(200).send('User Created');
   }
 );
