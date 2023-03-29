@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import axios from "axios";
 
@@ -6,29 +6,43 @@ function Game() {
   const [songName, setSongName] = useState("i give up");
   const [lyrics, setLyrics] = useState("");
   const [songsArray, setArray] = useState([])
-   const [winner, setWinner] = useState(false);
-   const [artistName, setArtistName] = useState("")
+  const [winner, setWinner] = useState(false);
+  const [artistName, setArtistName] = useState("");
+  const [usedPages, setUsedPages] = useState([])
+  
 
+  useEffect(() => {
+    async function getSongs() {
+      let pageNum = Math.ceil(Math.random() * 20);
+      while (usedPages.includes(pageNum)) {
+        pageNum = Math.ceil(Math.random() * 20);
+      }
+      setUsedPages([...usedPages, pageNum])
+      const response = await axios(`/api/getsongs/${pageNum}`);
+      setArray(response.data);
+    }
+    if (songsArray.length === 0) getSongs();
+  }, [songsArray, usedPages])
 
   async function randomizeTrack() {
-    const pageNum = Math.ceil(Math.random()) * 15
-    if (!songsArray.length){
-      axios.get(`/api/getsongs/${pageNum}`)
-        .then(arr => {
-          setArray(arr);
-        })
-    }
+    console.log(songsArray)
+    // const pageNum = Math.ceil(Math.random() * 15) 
+    // if (songsArray.length === 0){
+    //   const response = await axios(`/api/getsongs/${pageNum}`)
+    //   setArray(response)
+    // }
     const index = Math.floor(Math.random()) * (songsArray.length)
-    const getRandomSongObj = songsArray[index]
-    setArray(prevState => prevState.splice(index, 1));
-
+    const getRandomSongObj = songsArray[index];
+    const copy = [...songsArray];
+    copy.splice(index, 1);
+    setArray(copy);
     const {track_id, track_name, artist_name} = getRandomSongObj;
 
     setArtistName(artist_name)
     setSongName(track_name.toLowerCase())
-    axios.get(`/api/getLyrics/${track_id}`)
-      .then(lyrics => setLyrics(lyrics))
-      .catch((err) => console.log("error in getLyrics", err))
+    const lyrics = await axios.get(`/api/getLyrics/${track_id}`)
+      setLyrics(lyrics.data)
+      console.log(lyrics.data)
   }
 
 
@@ -44,7 +58,7 @@ function Game() {
       <Navbar />
       <div className="contentBox">
         <div className="gameContent">
-          <div className="lyrics" style={{ width: "75%" }}>
+          <div className="lyrics" style={{ width: "75%", textAlign: 'center'}}>
             <button onClick={randomizeTrack}>Generate Lyrics</button>
                 <div
                   style={{
@@ -52,7 +66,10 @@ function Game() {
                     height: "400px",
                     fontSize: "28px",
                     color: "black",
-                    width: "800px",
+                    width: "85%",
+                    margin: '0 auto 0',
+                    whiteSpace: 'pre-line',
+                    textAlign: 'center'
                   }}>
                     {lyrics}
                
