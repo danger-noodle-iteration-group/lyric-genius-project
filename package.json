@@ -18,6 +18,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
+    "regenerator-runtime": "^0.13.11",
     "sass": "^1.60.0",
     "sass-loader": "^13.2.1",
     "web-vitals": "^2.1.4"
@@ -28,6 +29,7 @@
     "client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test-server": "jest --verbose --detectOpenHandles",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -50,7 +52,10 @@
   },
   "devDependencies": {
     "cors": "^2.8.5",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
     "js-cookie": "^3.0.1",
-    "reactjs-popup": "^2.0.5"
+    "reactjs-popup": "^2.0.5",
+    "supertest": "^6.3.3"
   }
 }
