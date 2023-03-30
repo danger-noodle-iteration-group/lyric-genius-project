@@ -27,12 +27,7 @@ function Game() {
   }, [songsArray])
 
   async function randomizeTrack() {
-    console.log(songsArray)
-    // const pageNum = Math.ceil(Math.random() * 15) 
-    // if (songsArray.length === 0){
-    //   const response = await axios(`/api/getsongs/${pageNum}`)
-    //   setArray(response)
-    // }
+
     const index = Math.floor(Math.random()) * (songsArray.length)
     const getRandomSongObj = songsArray[index];
     const copy = [...songsArray];
