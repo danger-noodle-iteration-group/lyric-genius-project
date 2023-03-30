@@ -18,14 +18,13 @@ lyricsapiController.getSongs = (req, res, next) => {
     page,
     apikey,
   };
-  console.log(params)
   axios('track.search', {params})
   .then(function(info) {
     
     const { track_list } = info.data.message.body;
     
     const clean_track_list = track_list.filter(el => el.track.explicit === 0)
-    console.log(clean_track_list);
+    //console.log(clean_track_list);
     res.locals.songs = clean_track_list.map(el => {
       
       return {
@@ -34,7 +33,7 @@ lyricsapiController.getSongs = (req, res, next) => {
         artist_name: el.track.artist_name
       }
     })
-    console.log(res.locals.songs)
+    //console.log(res.locals.songs)
     return next()
   })
   .catch((error) => {

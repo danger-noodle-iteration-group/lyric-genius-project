@@ -8,21 +8,23 @@ function Game() {
   const [songsArray, setArray] = useState([])
   const [winner, setWinner] = useState(false);
   const [artistName, setArtistName] = useState("");
-  const [usedPages, setUsedPages] = useState([])
+  const [usedPages, setUsedPages] = useState([]);
   
 
   useEffect(() => {
+    
     async function getSongs() {
       let pageNum = Math.ceil(Math.random() * 20);
       while (usedPages.includes(pageNum)) {
         pageNum = Math.ceil(Math.random() * 20);
       }
-      setUsedPages([...usedPages, pageNum])
+      setUsedPages([...usedPages, pageNum]);
       const response = await axios(`/api/getsongs/${pageNum}`);
       setArray(response.data);
     }
     if (songsArray.length === 0) getSongs();
-  }, [songsArray, usedPages])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [songsArray])
 
   async function randomizeTrack() {
     console.log(songsArray)
@@ -72,7 +74,6 @@ function Game() {
                     textAlign: 'center'
                   }}>
                     {lyrics}
-               
                 </div>
           </div>
           <input onChange={input => compareAnswer(input)} />
