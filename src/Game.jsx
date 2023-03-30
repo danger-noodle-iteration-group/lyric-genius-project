@@ -27,6 +27,8 @@ function Game() {
   }, [songsArray])
 
   async function randomizeTrack() {
+    setWinner(false)
+    document.querySelector('#inputField').value = ''
     console.log(songsArray)
     // const pageNum = Math.ceil(Math.random() * 15) 
     // if (songsArray.length === 0){
@@ -76,7 +78,7 @@ function Game() {
                     {lyrics}
                 </div>
           </div>
-          <input onChange={input => compareAnswer(input)} />
+          <input id='inputField' onChange={input => compareAnswer(input)} />
           <br />
         </div>
       </div>

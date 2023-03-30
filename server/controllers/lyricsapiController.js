@@ -2,7 +2,7 @@ const axios = require('axios');
 const { raw } = require('express');
 require('dotenv').config();
 
-const apikey = process.env.LYRICS_API_KEY; // defined in .env
+const apikey = '5ad5bdc4bff41e453be25e947abfd440' // defined in .env
 axios.defaults.baseURL = 'https://api.musixmatch.com/ws/1.1/'; // potentially just have one url variable which is baseURL + endpoint
 
 const lyricsapiController = {};
