@@ -9,6 +9,12 @@ const lyricsapiController = {};
 
 lyricsapiController.getSongs = (req, res, next) => {
   const { page } = req.params
+
+  if (isNaN(page)) next({
+    log: 'Express error handler caught invalid api request middleware error',
+    status: 400,
+    message: { err: 'invalid api request' },
+  });
   const params = {
     f_track_release_group_first_release_date_min: 19491212,
     f_track_release_group_first_release_date_max: 20131212,
@@ -47,6 +53,14 @@ lyricsapiController.getSongs = (req, res, next) => {
 
 lyricsapiController.getLyrics = (req, res, next) => {
   const { id } = req.params;
+
+  if (isNaN(id))
+    next({
+      log: 'Express error handler caught invalid api request middleware error',
+      status: 400,
+      message: { err: 'invalid api request' },
+    });
+
   const params = {
     track_id: id,
     apikey
