@@ -12,17 +12,21 @@ function Game() {
   
 
   useEffect(() => {
-    async function getSongs() {
-      let pageNum = Math.ceil(Math.random() * 20);
-      while (usedPages.includes(pageNum)) {
-        pageNum = Math.ceil(Math.random() * 20);
-      }
-      setUsedPages([...usedPages, pageNum])
-      const response = await axios(`/api/getsongs/${pageNum}`);
-      setArray(response.data);
+    console.log("useEffect")
+    if (songsArray.length === 0) {
+        let pageNum = Math.ceil(Math.random() * 20);
+        while (usedPages.includes(pageNum)) {
+          pageNum = Math.ceil(Math.random() * 20);
+        }
+        setUsedPages([...usedPages, pageNum])
+
+         axios(`/api/getsongs/${1}`)
+          .then(res=>{
+            console.log(res.data)
+            setArray(res.data);
+        })
     }
-    if (songsArray.length === 0) getSongs();
-  }, [songsArray, usedPages])
+  }, [songsArray])
 
   async function randomizeTrack() {
     console.log(songsArray)

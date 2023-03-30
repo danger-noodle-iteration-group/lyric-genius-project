@@ -5,7 +5,8 @@ const lyricsapiController = require('../controllers/lyricsapiController');
 router.get(
   '/getsongs/:page',
   lyricsapiController.getSongs,
-  (req, res) => {
+  (req, res) => { 
+    console.log("return-----")
     return res.status(200).json(res.locals.songs);
   }
 );
