@@ -6,6 +6,7 @@ router.get(
   '/getsongs/:page',
   lyricsapiController.getSongs,
   (req, res) => {
+    console.log(res.locals.songs)
     return res.status(200).json(res.locals.songs);
   }
 );
