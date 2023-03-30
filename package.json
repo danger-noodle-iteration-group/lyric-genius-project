@@ -29,7 +29,7 @@
     "client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test-server": "jest --verbose",
+    "test-server": "jest --verbose --detectOpenHandles",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
