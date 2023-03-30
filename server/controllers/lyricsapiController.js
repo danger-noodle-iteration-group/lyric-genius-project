@@ -8,6 +8,22 @@ axios.defaults.baseURL = 'https://api.musixmatch.com/ws/1.1/'; // potentially ju
 const lyricsapiController = {};
 
 lyricsapiController.getSongs = (req, res, next) => {
+  function checkName(string) {
+    const dash = string.indexOf('-');
+    const paren = string.indexOf('(');
+    const bracket = string.indexOf('[');
+    const arr = [dash, paren, bracket]
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] !== -1){
+        if (arr[i] < string.length)
+        string = string.slice(0, arr[i])
+      }
+    }
+    return string.trim();
+  }
+
+
+
   const { page } = req.params
 
   if (isNaN(page)) next({
@@ -35,7 +51,7 @@ lyricsapiController.getSongs = (req, res, next) => {
       
       return {
         track_id: el.track.track_id,
-        track_name: el.track.track_name,
+        track_name: checkName(el.track.track_name),
         artist_name: el.track.artist_name
       }
     })
